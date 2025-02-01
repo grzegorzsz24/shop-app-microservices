@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    username: root
+    password: mysql
+    url: jdbc:mysql://localhost:3306/inventory-service?autoReconnect=true&createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+
+server:
+  port: 8082
