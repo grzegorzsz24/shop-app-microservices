@@ -2,11 +2,13 @@ package org.example.orderservice;
 
 import io.restassured.RestAssured;
 import org.example.orderservice.dto.OrderRequest;
+import org.example.orderservice.stubs.InventoryClientStub;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.MySQLContainer;
 
@@ -16,6 +18,7 @@ import static io.restassured.RestAssured.given;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWireMock(port = 0)
 class OrderServiceIT {
 
     @ServiceConnection
@@ -42,11 +45,15 @@ class OrderServiceIT {
     @Test
     @DisplayName("Should submit order successfully")
     void shouldSubmitOrder() {
+        // given
         OrderRequest orderRequest = new OrderRequest(
-                "Iphone 16",
+                "Iphone_16",
                 BigDecimal.valueOf(1500),
                 12);
 
+        InventoryClientStub.stubInventoryCall(orderRequest.skuCode(), orderRequest.quantity());
+
+        // when & then
         given()
                 .contentType("application/json")
                 .body(orderRequest)
