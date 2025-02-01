@@ -2,6 +2,7 @@ package org.example.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.orderservice.dto.OrderRequest;
+import org.example.orderservice.dto.OrderResponse;
 import org.example.orderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,7 @@ class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String placeOrder(@RequestBody OrderRequest orderRequest) {
-        orderService.placeOrder(orderRequest);
-        return "Order Placed";
+    public OrderResponse placeOrder(@RequestBody OrderRequest orderRequest) {
+        return orderService.placeOrder(orderRequest);
     }
 }

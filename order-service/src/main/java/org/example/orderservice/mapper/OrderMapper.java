@@ -1,6 +1,7 @@
 package org.example.orderservice.mapper;
 
 import org.example.orderservice.dto.OrderRequest;
+import org.example.orderservice.dto.OrderResponse;
 import org.example.orderservice.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -9,4 +10,5 @@ import org.mapstruct.MappingConstants;
 public interface OrderMapper {
 
     Order toEntity(OrderRequest orderRequest);
+    OrderResponse toResponse(Order order);
 }
