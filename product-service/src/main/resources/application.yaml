@@ -6,6 +6,6 @@ spring:
       uri: mongodb://localhost:27017/product-service
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
+    path: /swagger-ui
   api-docs:
     path: /api-docs
