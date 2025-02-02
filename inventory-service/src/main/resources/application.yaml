@@ -12,5 +12,11 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/master.xml
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /api-docs
+
 server:
   port: 8082
