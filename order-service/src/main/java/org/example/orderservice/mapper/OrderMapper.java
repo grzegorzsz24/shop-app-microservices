@@ -10,5 +10,6 @@ import org.mapstruct.MappingConstants;
 public interface OrderMapper {
 
     Order toEntity(OrderRequest orderRequest);
+
     OrderResponse toResponse(Order order);
 }
