@@ -7,5 +7,18 @@ spring:
         jwt:
           issuer-uri: http://localhost:8181/realms/shop-microservices-security-realm
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    urls:
+      - name: Product Service
+        url: /aggregate/product-service/v3/api-docs
+      - name: Order Service
+        url: /aggregate/order-service/v3/api-docs
+      - name: Inventory Service
+        url: /aggregate/inventory-service/v3/api-docs
+  api-docs:
+    path: /api-docs
+
 server:
   port: 9000
