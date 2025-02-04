@@ -46,9 +46,16 @@ resilience4j:
         wait-duration-in-open-state:
           seconds: 5
         permitted-number-of-calls-in-half-open-state: 3
+        minimum-number-of-calls: 5
         automatic-transition-from-open-to-half-open-enabled: true
   timelimiter:
     configs:
       default:
         timeout-duration:
           seconds: 3
+  retry:
+    configs:
+      default:
+        max-attempts: 3
+        wait-duration:
+          seconds: 2
