@@ -25,4 +25,10 @@ class ProductController {
     List<ProductDto> getAllProducts() {
         return productService.getAllProducts();
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    ProductDto getProductById(@RequestParam String id) {
+        return productService.getProductById(id);
+    }
 }

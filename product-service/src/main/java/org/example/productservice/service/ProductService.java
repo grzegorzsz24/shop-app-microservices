@@ -3,6 +3,7 @@ package org.example.productservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.productservice.dto.ProductDto;
+import org.example.productservice.exception.ProductNotFound;
 import org.example.productservice.mapper.ProductMapper;
 import org.example.productservice.model.Product;
 import org.example.productservice.repository.ProductRepository;
@@ -30,5 +31,11 @@ public class ProductService {
                 .stream()
                 .map(productMapper::toDto)
                 .toList();
+    }
+
+    public ProductDto getProductById(String id) {
+        return productRepository.findById(id)
+                .map(productMapper::toDto)
+                .orElseThrow(() -> new ProductNotFound("Product with id " + id + " not found"));
     }
 }
