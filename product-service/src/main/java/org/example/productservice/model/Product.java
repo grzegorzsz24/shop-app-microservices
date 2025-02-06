@@ -1,9 +1,6 @@
 package org.example.productservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +20,7 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
