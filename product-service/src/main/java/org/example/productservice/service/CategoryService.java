@@ -8,6 +8,8 @@ import org.example.productservice.model.Category;
 import org.example.productservice.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -19,5 +21,12 @@ public class CategoryService {
         categoryRepository.save(category);
 
         return categoryMapper.toResponse(category);
+    }
+
+    public List<CategoryResponse> getAllParentCategories() {
+        return categoryRepository.findByParentCategoryIsNull()
+                .stream()
+                .map(categoryMapper::toResponse)
+                .toList();
     }
 }

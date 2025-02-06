@@ -7,6 +7,8 @@ import org.example.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
@@ -17,5 +19,11 @@ class CategoryController {
     @ResponseStatus(HttpStatus.CREATED)
     CategoryResponse createCategory(@RequestBody CategoryRequest request) {
         return categoryService.createCategory(request);
+    }
+
+    @GetMapping("/parents")
+    @ResponseStatus(HttpStatus.OK)
+    List<CategoryResponse> getAllCategories() {
+        return categoryService.getAllParentCategories();
     }
 }
