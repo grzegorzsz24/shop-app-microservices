@@ -33,7 +33,7 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductDto getProductById(String id) {
+    public ProductDto getProductById(Long id) {
         return productRepository.findById(id)
                 .map(productMapper::toDto)
                 .orElseThrow(() -> new ProductNotFound("Product with id " + id + " not found"));

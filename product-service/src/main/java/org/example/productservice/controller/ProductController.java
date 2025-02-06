@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
 class ProductController {
     private final ProductService productService;
@@ -26,9 +26,9 @@ class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ProductDto getProductById(@RequestParam String id) {
+    ProductDto getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
 }

@@ -1,9 +1,15 @@
 spring:
   application:
     name: product-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/product-service
+  datasource:
+    username: root
+    password: password
+    url: jdbc:postgresql://localhost:5432/product-service?autoReconnect=true&createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
 springdoc:
   swagger-ui:
     path: /swagger-ui
