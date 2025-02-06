@@ -7,8 +7,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/product-service?autoReconnect=true&createDatabaseIfNotExist=true
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
 
 springdoc:
   swagger-ui:
