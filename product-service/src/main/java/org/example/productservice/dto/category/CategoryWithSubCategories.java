@@ -1,4 +1,4 @@
-package org.example.productservice.dto;
+package org.example.productservice.dto.category;
 
 import lombok.Getter;
 import lombok.Setter;

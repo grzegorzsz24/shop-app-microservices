@@ -1,9 +1,9 @@
 package org.example.productservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.productservice.dto.CategoryRequest;
-import org.example.productservice.dto.CategoryResponse;
-import org.example.productservice.dto.CategoryWithSubCategories;
+import org.example.productservice.dto.category.CategoryRequest;
+import org.example.productservice.dto.category.CategoryResponse;
+import org.example.productservice.dto.category.CategoryWithSubCategories;
 import org.example.productservice.exception.CategoryNotFound;
 import org.example.productservice.mapper.CategoryMapper;
 import org.example.productservice.model.Category;

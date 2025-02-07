@@ -1,8 +1,8 @@
 package org.example.productservice.mapper;
 
-import org.example.productservice.dto.CategoryRequest;
-import org.example.productservice.dto.CategoryResponse;
-import org.example.productservice.dto.CategoryWithSubCategories;
+import org.example.productservice.dto.category.CategoryRequest;
+import org.example.productservice.dto.category.CategoryResponse;
+import org.example.productservice.dto.category.CategoryWithSubCategories;
 import org.example.productservice.model.Category;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;

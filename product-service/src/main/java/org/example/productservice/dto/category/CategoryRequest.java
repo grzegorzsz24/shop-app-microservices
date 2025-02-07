@@ -1,4 +1,4 @@
-package org.example.productservice.dto;
+package org.example.productservice.dto.category;
 
 public record CategoryRequest(
         String name,

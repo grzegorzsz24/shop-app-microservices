@@ -1,9 +1,9 @@
 package org.example.productservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.productservice.dto.CategoryRequest;
-import org.example.productservice.dto.CategoryResponse;
-import org.example.productservice.dto.CategoryWithSubCategories;
+import org.example.productservice.dto.category.CategoryRequest;
+import org.example.productservice.dto.category.CategoryResponse;
+import org.example.productservice.dto.category.CategoryWithSubCategories;
 import org.example.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
