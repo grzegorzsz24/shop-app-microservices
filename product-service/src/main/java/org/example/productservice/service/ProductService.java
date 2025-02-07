@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.productservice.dto.ProductDto;
 import org.example.productservice.exception.ProductNotFound;
 import org.example.productservice.mapper.ProductMapper;
+import org.example.productservice.model.Category;
 import org.example.productservice.model.Product;
 import org.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CategoryService categoryService;
 
-    public ProductDto createProduct(ProductDto productRequest) {
+    public ProductDto createProduct(ProductDto productRequest, Long categoryId) {
+        Category category = categoryService.getCategoryOrThrow(categoryId);
         Product product = productMapper.toEntity(productRequest);
+        product.setCategory(category);
         productRepository.save(product);
         log.info("Product created");
 

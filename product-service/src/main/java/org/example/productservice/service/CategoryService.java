@@ -22,8 +22,7 @@ public class CategoryService {
         Category category = categoryMapper.toEntity(request);
         Long parentCategoryId = request.parentCategoryId();
         if (parentCategoryId != null) {
-            Category parentCategory = categoryRepository.findById(parentCategoryId)
-                    .orElseThrow(() -> new CategoryNotFound("Category with id " + parentCategoryId + " not found"));
+            Category parentCategory = getCategoryOrThrow(parentCategoryId);
             category.setParentCategory(parentCategory);
         }
         categoryRepository.save(category);
@@ -43,5 +42,11 @@ public class CategoryService {
                 .orElseThrow(() -> new CategoryNotFound("Category with id " + id + " not found"));
 
         return categoryMapper.toWithSubCategories(category);
+    }
+
+    // TODO: decide if needed
+    public Category getCategoryOrThrow(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFound("Category with id " + id + " not found"));
     }
 }

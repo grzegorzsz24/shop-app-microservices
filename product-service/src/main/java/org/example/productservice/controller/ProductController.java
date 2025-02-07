@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 class ProductController {
     private final ProductService productService;
 
-    @PostMapping
+    @PostMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.CREATED)
-    ProductDto createProduct(@RequestBody ProductDto productRequest) {
-        return productService.createProduct(productRequest);
+    ProductDto createProduct(@RequestBody ProductDto productRequest, @PathVariable Long categoryId) {
+        return productService.createProduct(productRequest, categoryId);
     }
 
-    @GetMapping
+    @GetMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.OK)
-    List<ProductDto> getAllProducts() {
+    List<ProductDto> getAllProducts(@PathVariable Long categoryId) {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{categoryId}/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
-    ProductDto getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+    ProductDto getProductById(@PathVariable Long categoryId, @PathVariable Long productId) {
+        return productService.getProductById(productId);
     }
 }
