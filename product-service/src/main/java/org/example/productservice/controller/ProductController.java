@@ -24,7 +24,7 @@ class ProductController {
     @GetMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.OK)
     List<ProductRequest> getAllProducts(@PathVariable Long categoryId) {
-        return productService.getAllProducts();
+        return productService.getAllProducts(categoryId);
     }
 
     @GetMapping("/{categoryId}/products/{productId}")

@@ -31,7 +31,7 @@ public class ProductService {
         return productMapper.toResponse(product);
     }
 
-    public List<ProductRequest> getAllProducts() {
+    public List<ProductRequest> getAllProducts(Long categoryId) {
         return productRepository.findAll()
                 .stream()
                 .map(productMapper::toDto)
