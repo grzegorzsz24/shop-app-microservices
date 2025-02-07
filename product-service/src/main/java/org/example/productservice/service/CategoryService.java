@@ -3,6 +3,8 @@ package org.example.productservice.service;
 import lombok.RequiredArgsConstructor;
 import org.example.productservice.dto.CategoryRequest;
 import org.example.productservice.dto.CategoryResponse;
+import org.example.productservice.dto.CategoryWithSubCategories;
+import org.example.productservice.exception.CategoryNotFound;
 import org.example.productservice.mapper.CategoryMapper;
 import org.example.productservice.model.Category;
 import org.example.productservice.repository.CategoryRepository;
@@ -18,6 +20,12 @@ public class CategoryService {
 
     public CategoryResponse createCategory(CategoryRequest request) {
         Category category = categoryMapper.toEntity(request);
+        Long parentCategoryId = request.parentCategoryId();
+        if (parentCategoryId != null) {
+            Category parentCategory = categoryRepository.findById(parentCategoryId)
+                    .orElseThrow(() -> new CategoryNotFound("Category with id " + parentCategoryId + " not found"));
+            category.setParentCategory(parentCategory);
+        }
         categoryRepository.save(category);
 
         return categoryMapper.toResponse(category);
@@ -28,5 +36,12 @@ public class CategoryService {
                 .stream()
                 .map(categoryMapper::toResponse)
                 .toList();
+    }
+
+    public CategoryWithSubCategories getCategoryWithSubCategories(Long id) {
+        Category category = categoryRepository.findCategoryWithSubCategoriesById(id)
+                .orElseThrow(() -> new CategoryNotFound("Category with id " + id + " not found"));
+
+        return categoryMapper.toWithSubCategories(category);
     }
 }

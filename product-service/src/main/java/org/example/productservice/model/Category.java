@@ -23,4 +23,6 @@ public class Category {
     private Category parentCategory;
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL)
+    private List<Category> subCategories;
 }

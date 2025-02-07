@@ -3,6 +3,7 @@ package org.example.productservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.productservice.dto.CategoryRequest;
 import org.example.productservice.dto.CategoryResponse;
+import org.example.productservice.dto.CategoryWithSubCategories;
 import org.example.productservice.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,12 @@ class CategoryController {
 
     @GetMapping("/parents")
     @ResponseStatus(HttpStatus.OK)
-    List<CategoryResponse> getAllCategories() {
+    List<CategoryResponse> getAllParentCategories() {
         return categoryService.getAllParentCategories();
+    }
+
+    @GetMapping("/{id}")
+    CategoryWithSubCategories getCategoryWithSubCategories(@PathVariable Long id) {
+        return categoryService.getCategoryWithSubCategories(id);
     }
 }
