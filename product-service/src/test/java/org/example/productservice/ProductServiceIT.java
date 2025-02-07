@@ -2,7 +2,7 @@
 //
 //import io.restassured.RestAssured;
 //import io.restassured.http.ContentType;
-//import org.example.productservice.dto.ProductDto;
+//import org.example.productservice.dto.product.ProductDto;
 //import org.hamcrest.Matchers;
 //import org.junit.jupiter.api.*;
 //import org.springframework.boot.test.context.SpringBootTest;

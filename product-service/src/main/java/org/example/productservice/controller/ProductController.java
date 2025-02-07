@@ -1,7 +1,8 @@
 package org.example.productservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.productservice.dto.ProductDto;
+import org.example.productservice.dto.product.ProductRequest;
+import org.example.productservice.dto.product.ProductResponse;
 import org.example.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +17,19 @@ class ProductController {
 
     @PostMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.CREATED)
-    ProductDto createProduct(@RequestBody ProductDto productRequest, @PathVariable Long categoryId) {
+    ProductResponse createProduct(@RequestBody ProductRequest productRequest, @PathVariable Long categoryId) {
         return productService.createProduct(productRequest, categoryId);
     }
 
     @GetMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.OK)
-    List<ProductDto> getAllProducts(@PathVariable Long categoryId) {
+    List<ProductRequest> getAllProducts(@PathVariable Long categoryId) {
         return productService.getAllProducts();
     }
 
     @GetMapping("/{categoryId}/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
-    ProductDto getProductById(@PathVariable Long categoryId, @PathVariable Long productId) {
-        return productService.getProductById(productId);
+    ProductResponse getProductById(@PathVariable Long categoryId, @PathVariable Long productId) {
+        return productService.getProductById(productId, categoryId);
     }
 }

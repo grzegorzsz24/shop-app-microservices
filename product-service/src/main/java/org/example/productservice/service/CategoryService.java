@@ -44,9 +44,15 @@ public class CategoryService {
         return categoryMapper.toWithSubCategories(category);
     }
 
-    // TODO: decide if needed
     public Category getCategoryOrThrow(Long id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFound("Category with id " + id + " not found"));
+    }
+
+    public boolean doesCategoryExist(Long id) {
+        if (categoryRepository.existsById(id) == false) {
+            throw new CategoryNotFound("Category with id " + id + " not found");
+        }
+        return true;
     }
 }
