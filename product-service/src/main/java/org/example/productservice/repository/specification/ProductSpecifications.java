@@ -1,6 +1,7 @@
 package org.example.productservice.repository.specification;
 
 import jakarta.persistence.criteria.Predicate;
+import org.example.productservice.dto.product.FilteredProductRequest;
 import org.example.productservice.model.Product;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -15,7 +16,8 @@ public class ProductSpecifications {
 
     private static Specification<Product> hasName(String name) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(root.get("name"), "%" + name + "%");
+                criteriaBuilder.like(
+                        criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%");
     }
 
     private static Specification<Product> minPrice(BigDecimal minPrice) {
@@ -32,11 +34,15 @@ public class ProductSpecifications {
         };
     }
 
-    private Specification<Product> alwaysTrue() {
+    private static Specification<Product> alwaysTrue() {
         return (root, query, criteriaBuilder) -> criteriaBuilder.conjunction();
     }
 
-    private Specification<Product> prepareSpecification(Product product) {
-        return alwaysTrue();
+    public static Specification<Product> prepareSpecification(FilteredProductRequest request) {
+        return alwaysTrue()
+                .and(request.category() != null ? hasCategory(request.category()) : alwaysTrue())
+                .and(request.name() != null ? hasName(request.name()) : alwaysTrue())
+                .and(request.minPrice() != null ? minPrice(request.minPrice()) : alwaysTrue())
+                .and(request.maxPrice() != null ? maxPrice(request.maxPrice()) : alwaysTrue());
     }
 }

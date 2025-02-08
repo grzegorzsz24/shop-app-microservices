@@ -1,12 +1,14 @@
 package org.example.productservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.productservice.dto.product.FilteredProductRequest;
 import org.example.productservice.dto.product.ProductRequest;
 import org.example.productservice.dto.product.ProductResponse;
 import org.example.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -23,8 +25,23 @@ class ProductController {
 
     @GetMapping("/{categoryId}/products")
     @ResponseStatus(HttpStatus.OK)
-    List<ProductRequest> getAllProducts(@PathVariable Long categoryId) {
-        return productService.getAllProducts(categoryId);
+    List<ProductResponse> getAllProducts(
+            @PathVariable Long categoryId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false) String[] sort
+
+    ) {
+        FilteredProductRequest request = new FilteredProductRequest(
+                categoryId,
+                name,
+                minPrice,
+                maxPrice
+        );
+        return productService.getAllProducts(request, page, size, sort);
     }
 
     @GetMapping("/{categoryId}/products/{productId}")
