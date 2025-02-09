@@ -5,7 +5,9 @@ import org.example.productservice.dto.product.FilteredProductRequest;
 import org.example.productservice.dto.product.ProductRequest;
 import org.example.productservice.dto.product.ProductResponse;
 import org.example.productservice.service.ProductService;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -48,5 +50,10 @@ class ProductController {
     @ResponseStatus(HttpStatus.OK)
     ProductResponse getProductById(@PathVariable Long categoryId, @PathVariable Long productId) {
         return productService.getProductById(productId, categoryId);
+    }
+
+    @InitBinder
+    void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String[].class, new StringTrimmerEditor(true));
     }
 }

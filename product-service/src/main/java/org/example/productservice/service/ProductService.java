@@ -12,6 +12,7 @@ import org.example.productservice.model.Category;
 import org.example.productservice.model.Product;
 import org.example.productservice.repository.ProductRepository;
 import org.example.productservice.repository.specification.ProductSpecifications;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final CategoryService categoryService;
+    private final MessageSource messageSource;
 
     private static final List<String> VALID_SORT_FIELDS = List.of("name", "price");
 
@@ -64,26 +67,31 @@ public class ProductService {
                 .map(sortParam -> {
                     String[] sortArray = sortParam.split(",");
                     if (sortArray.length != 2) {
-                        throw new InvalidSortParameterException("");
+                        throw new InvalidSortParameterException(getMessage("invalid.sort.parameters",
+                                String.join(",", sortArray). replace(" ", "")));
                     }
 
                     String sortField = sortArray[0].trim();
                     String sortDirection = sortArray[1].trim().toUpperCase();
 
                     if (!VALID_SORT_FIELDS.contains(sortField)) {
-                        throw new InvalidSortParameterException("");
+                        throw new InvalidSortParameterException(getMessage("invalid.sort.field", sortField));
                     }
 
                     Sort.Direction direction;
                     try {
                         direction = Sort.Direction.fromString(sortDirection);
                     } catch (IllegalArgumentException e) {
-                        throw new InvalidSortParameterException("");
+                        throw new InvalidSortParameterException(getMessage("invalid.sort.direction", sortDirection));
                     }
 
                     return Sort.by(direction, sortField);
                         }
                 ).reduce(Sort::and)
                 .orElse(Sort.unsorted());
+    }
+
+    private String getMessage(String code, Object... params) {
+        return messageSource.getMessage(code, params, Locale.getDefault());
     }
 }
