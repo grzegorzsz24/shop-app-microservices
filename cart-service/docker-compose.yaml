@@ -9,4 +9,20 @@ services:
       MONGO_DB_PASSWORD: password
       MONGO_DB_DATABASE: cart-service
     volumes:
-      - ./data:/data/db
+      - ./data:/data
+
+  redis:
+    image: docker.io/library/redis:7.4.0
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass password
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  data: {}
+  redis_data:

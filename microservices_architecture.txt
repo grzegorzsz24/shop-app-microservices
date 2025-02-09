@@ -1,0 +1,3 @@
+https://www.atlassian.com/microservices/microservices-architecture
+https://www.scnsoft.com/ecommerce/microservices
+https://www.scnsoft.com/ecommerce/custom-shopping-cart
