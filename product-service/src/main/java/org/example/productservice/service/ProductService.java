@@ -56,7 +56,7 @@ public class ProductService {
         categoryService.doesCategoryExist(categoryId);
         return productRepository.findById(productId)
                 .map(productMapper::toResponse)
-                .orElseThrow(() -> new ProductNotFound("Product with id " + productId + " not found"));
+                .orElseThrow(() -> new ProductNotFound(getMessage("not.found.product", productId)));
     }
 
     private Sort createSortOrder(String[] sort) {
