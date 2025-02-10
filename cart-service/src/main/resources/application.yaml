@@ -17,3 +17,46 @@ spring:
       host: localhost
       port: 6379
       password: password
+
+product:
+  url: http://localhost:8080
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: ["*"]
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      product:
+        registerHealthIndicator: true
+        event-consumer-buffer-size: 10
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState:
+          seconds: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        minimum-number-of-calls: 5
+  timelimiter:
+    instances:
+      product:
+        timeout-duration:
+          seconds: 3
+  retry:
+    instances:
+      product:
+        max-attempts: 3
+        wait-duration:
+          seconds: 5
+server:
+  port: 8082
