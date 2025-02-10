@@ -52,6 +52,14 @@ class ProductController {
         return productService.getProductById(productId, categoryId);
     }
 
+    @GetMapping("/{categoryId}/products/{productId}/availability")
+    @ResponseStatus(HttpStatus.OK)
+    boolean isProductAvailable(@PathVariable Long categoryId,
+                               @PathVariable Long productId,
+                               @RequestParam Integer quantity) {
+        return productService.isProductAvailable(categoryId, productId, quantity);
+    }
+
     @InitBinder
     void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String[].class, new StringTrimmerEditor(true));

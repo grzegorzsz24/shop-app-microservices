@@ -94,4 +94,8 @@ public class ProductService {
     private String getMessage(String code, Object... params) {
         return messageSource.getMessage(code, params, Locale.getDefault());
     }
+
+    public boolean isProductAvailable(Long categoryId, Long productId, Integer quantity) {
+        return productRepository.existsByIdAndQuantityIsGreaterThanEqual(productId, quantity);
+    }
 }
