@@ -1,6 +1,7 @@
 package org.example.cartservice.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.cartservice.dto.CartResponse;
 import org.example.cartservice.dto.CartItemDto;
 import org.example.cartservice.exception.CartNotFound;
@@ -14,6 +15,7 @@ import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CartService {
     private final CartRepository cartRepository;
     private final RedisTemplate<String, Cart> redisTemplate;
@@ -22,8 +24,10 @@ public class CartService {
     public CartResponse getCart(String userId) {
         String key = "cart: " + userId;
         Cart cart = redisTemplate.opsForValue().get(key);
+        log.info("cart: {}", cart);
         if (cart == null) {
-            throw new CartNotFound("Cart not found");
+            cart = cartRepository.findById(userId)
+                    .orElseThrow(() -> new CartNotFound("Cart not found"));
         }
 
         return cartMapper.toResponse(cart);
@@ -33,7 +37,7 @@ public class CartService {
         String key = "cart: " + userId;
         Cart cart = redisTemplate.opsForValue().get(key);
         if (cart == null) {
-            cart = new Cart(userId);
+            cart = cartRepository.findById(userId).orElse(new Cart(userId));
         }
 
         cart.addItem(cartMapper.toItem(item));
