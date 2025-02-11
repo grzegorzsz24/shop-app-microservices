@@ -8,9 +8,16 @@ import org.springframework.web.client.RestClient;
 class RestClientConfig {
 
     @Bean
-    RestClient restClient(RestClient.Builder builder) {
+    RestClient cartRestClient(RestClient.Builder builder) {
         return builder
                 .baseUrl("http://localhost:8082")
+                .build();
+    }
+
+    @Bean
+    RestClient productRestClient(RestClient.Builder builder) {
+        return builder
+                .baseUrl("http://localhost:8080")
                 .build();
     }
 }
