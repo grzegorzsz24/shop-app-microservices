@@ -59,3 +59,10 @@ resilience4j:
         max-attempts: 3
         wait-duration:
           seconds: 5
+
+payment:
+  stripe:
+    api-key: ${STRIPE_API_KEY}
+    webhook-secret-key: ${STRIPE_WEBHOOK_SECRET_KEY}
+  check-status-delay: PT3M
+  payment-max-age: 15

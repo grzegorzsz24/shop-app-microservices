@@ -2,7 +2,6 @@ package org.example.orderservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.orderservice.client.InventoryClient;
 import org.example.orderservice.dto.OrderRequest;
 import org.example.orderservice.dto.OrderResponse;
 import org.example.orderservice.exception.ProductNotInStock;
