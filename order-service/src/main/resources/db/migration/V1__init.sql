@@ -1,9 +1,9 @@
 CREATE TABLE orders
 (
-    id           char(36) NOT NULL,
-    order_number varchar(255) DEFAULT NULL,
-    sku_code     varchar(255),
-    price        decimal(19, 2),
-    quantity     int(11),
+    id              CHAR(36) NOT NULL,
+    orderer_email   VARCHAR(255) NOT NULL,
+    order_date      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    status          VARCHAR(255) NOT NULL,
+    price           DECIMAL(19, 2),
     PRIMARY KEY (id)
 );
