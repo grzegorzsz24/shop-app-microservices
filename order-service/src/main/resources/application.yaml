@@ -4,7 +4,7 @@ spring:
   datasource:
     username: root
     password: mysql
-    url: jdbc:mysql://localhost:3316/order_service?autoReconnect=true&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/order_service?autoReconnect=true&createDatabaseIfNotExist=true
   jpa:
     hibernate:
       ddl-auto: validate
@@ -19,9 +19,6 @@ springdoc:
 server:
   port: 8081
 
-inventory:
-  url: http://localhost:8082
-
 management:
   health:
     circuitbreakers:
@@ -29,7 +26,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: *
+        include: ["*"]
   endpoint:
     health:
       show-details: always

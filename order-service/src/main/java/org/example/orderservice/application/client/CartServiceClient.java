@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.orderservice.application.dto.CartDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.service.annotation.GetExchange;
 
 @Component
 @RequiredArgsConstructor

@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+
 public class Payment {
 
     @Id

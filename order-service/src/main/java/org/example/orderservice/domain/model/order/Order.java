@@ -3,8 +3,6 @@ package org.example.orderservice.domain.model.order;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.orderservice.application.dto.CartItemDto;
-import org.example.orderservice.domain.model.payment.Payment;
-import org.example.orderservice.domain.model.payment.PersistentMoney;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -13,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,9 +42,6 @@ public class Order {
     private OrderStatus status = OrderStatus.PENDING;
 
     private BigDecimal price;
-
-    @OneToMany(mappedBy = "order")
-    private List<Payment> payments;
 
     @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)

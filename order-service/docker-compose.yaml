@@ -6,7 +6,8 @@ services:
       MYSQL_ROOT_PASSWORD: mysql
       MYSQL_DATABASE: order_service
       MYSQL_PASSWORD: mysql
+      MYSQL_USER: root
     ports:
-      - "3316:3306"
+      - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
