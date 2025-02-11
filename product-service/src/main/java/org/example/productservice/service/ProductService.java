@@ -3,6 +3,7 @@ package org.example.productservice.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.productservice.dto.product.FilteredProductRequest;
+import org.example.productservice.dto.product.ProductPriceResponse;
 import org.example.productservice.dto.product.ProductRequest;
 import org.example.productservice.dto.product.ProductResponse;
 import org.example.productservice.exception.InvalidSortParameterException;
@@ -97,5 +98,11 @@ public class ProductService {
 
     public boolean isProductAvailable(Long categoryId, Long productId, Integer quantity) {
         return productRepository.existsByIdAndQuantityIsGreaterThanEqual(productId, quantity);
+    }
+
+    public List<ProductPriceResponse> getProductPrices(List<Long> productIds) {
+        return productRepository.findByIdIn(productIds).stream()
+                .map(product -> new ProductPriceResponse(product.id(), product.price()))
+                .toList();
     }
 }

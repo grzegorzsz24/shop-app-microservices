@@ -2,6 +2,7 @@ package org.example.productservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.productservice.dto.product.FilteredProductRequest;
+import org.example.productservice.dto.product.ProductPriceResponse;
 import org.example.productservice.dto.product.ProductRequest;
 import org.example.productservice.dto.product.ProductResponse;
 import org.example.productservice.service.ProductService;
@@ -58,6 +59,12 @@ class ProductController {
                                @PathVariable Long productId,
                                @RequestParam Integer quantity) {
         return productService.isProductAvailable(categoryId, productId, quantity);
+    }
+
+    @PostMapping("/products/prices")
+    @ResponseStatus(HttpStatus.OK)
+    List<ProductPriceResponse> getProductPrices(@RequestBody List<Long> productIds) {
+        return productService.getProductPrices(productIds);
     }
 
     @InitBinder
