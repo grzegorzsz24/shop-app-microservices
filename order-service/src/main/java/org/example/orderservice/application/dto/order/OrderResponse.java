@@ -1,11 +1,17 @@
 package org.example.orderservice.application.dto.order;
 
+import org.example.orderservice.application.dto.CartItemDto;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.UUID;
 
 public record OrderResponse(
-        String orderNumber,
-        String skuCode,
+        UUID id,
+        String ordererEmail,
+        LocalDateTime orderDate,
         BigDecimal price,
-        Integer quantity
+        Set<CartItemDto> orderedProducts
 ) {
 }

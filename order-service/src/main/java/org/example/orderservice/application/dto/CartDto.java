@@ -1,9 +1,9 @@
 package org.example.orderservice.application.dto;
 
-import java.util.List;
+import java.util.Set;
 
 public record CartDto(
         String userId,
-        List<CartItemDto> items
+        Set<CartItemDto> items
 ) {
 }

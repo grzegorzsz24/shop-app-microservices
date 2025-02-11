@@ -2,6 +2,7 @@ package org.example.orderservice.domain.model.order;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.orderservice.application.dto.CartItemDto;
 import org.example.orderservice.domain.model.payment.Payment;
 import org.example.orderservice.domain.model.payment.PersistentMoney;
 import org.hibernate.annotations.CreationTimestamp;
@@ -43,13 +44,12 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
 
-    @Embedded
-    private PersistentMoney price;
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "order")
     private List<Payment> payments;
 
     @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<OrderProduct> orderedProducts = new HashSet<>();
+    private Set<CartItemDto> orderedProducts = new HashSet<>();
 }

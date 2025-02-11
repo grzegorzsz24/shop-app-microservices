@@ -14,7 +14,7 @@ public class CartServiceClient {
     public CartDto getCart(String userId) {
         return restClient.get()
                 .uri("/api/cart")
-                .header("X-User_id", userId)
+                .header("X-User-Id", userId)
                 .retrieve()
                 .body(CartDto.class);
     }
