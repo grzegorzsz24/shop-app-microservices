@@ -1,4 +1,4 @@
-package org.example.orderservice.model;
+package org.example.orderservice.domain.model.payment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

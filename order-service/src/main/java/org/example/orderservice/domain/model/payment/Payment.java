@@ -1,4 +1,4 @@
-package org.example.orderservice.model;
+package org.example.orderservice.domain.model.payment;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

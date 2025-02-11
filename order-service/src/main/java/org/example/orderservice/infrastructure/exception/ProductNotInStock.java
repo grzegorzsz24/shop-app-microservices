@@ -1,4 +1,4 @@
-package org.example.orderservice.exception;
+package org.example.orderservice.infrastructure.exception;
 
 public class ProductNotInStock extends RuntimeException {
     public ProductNotInStock(String message) {

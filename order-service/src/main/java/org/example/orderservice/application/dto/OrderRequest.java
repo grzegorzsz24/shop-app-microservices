@@ -1,9 +1,8 @@
-package org.example.orderservice.dto;
+package org.example.orderservice.application.dto;
 
 import java.math.BigDecimal;
 
-public record OrderResponse(
-        String orderNumber,
+public record OrderRequest(
         String skuCode,
         BigDecimal price,
         Integer quantity

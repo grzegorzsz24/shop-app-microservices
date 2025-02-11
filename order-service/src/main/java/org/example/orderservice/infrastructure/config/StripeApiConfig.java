@@ -1,4 +1,4 @@
-package org.example.orderservice.config;
+package org.example.orderservice.infrastructure.config;
 
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;

@@ -1,4 +1,6 @@
-package org.example.orderservice.dto;
+package org.example.orderservice.application.dto;
+
+import org.example.orderservice.domain.model.payment.PaymentStatus;
 
 public record PaymentStatusResponse(
         String paymentSessionId,

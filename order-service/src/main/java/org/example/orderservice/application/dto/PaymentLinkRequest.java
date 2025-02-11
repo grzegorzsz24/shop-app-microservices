@@ -1,4 +1,4 @@
-package org.example.orderservice.dto;
+package org.example.orderservice.application.dto;
 
 public record PaymentLinkRequest(
         String orderId
