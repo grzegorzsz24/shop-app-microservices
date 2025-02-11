@@ -13,6 +13,7 @@ import org.example.orderservice.application.dto.order.OrderResponse;
 
 import org.example.orderservice.domain.mapper.OrderMapper;
 import org.example.orderservice.domain.model.order.Order;
+import org.example.orderservice.infrastructure.exception.ProductNotFoundException;
 import org.example.orderservice.infrastructure.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,17 +33,18 @@ public class OrderService {
         CartDto cartDto = cartServiceClient.getCart(orderRequest.userId());
 
         List<Long> productIds = cartDto.items().stream()
-                .map(CartItemDto::id)
+                .map(CartItemDto::productId)
                 .toList();
+        log.info(productIds.toString());
 
         List<ProductPriceResponse> productPrices = productServiceClient.getProductPrices(productIds);
-
+        log.info(productPrices.toString());
         BigDecimal totalPrice = cartDto.items().stream()
                 .map(item -> {
                     ProductPriceResponse priceResponse = productPrices.stream()
-                            .filter(p -> p.productId().equals(item.id()))
+                            .filter(p -> p.id().equals(item.productId()))
                             .findFirst()
-                            .orElseThrow(RuntimeException::new);
+                            .orElseThrow(() -> new ProductNotFoundException("Product with id: " + item.productId() + " not found"));
 
                     return priceResponse.price().multiply(BigDecimal.valueOf(item.quantity()));
                 })

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Embeddable
 public record CartItemDto(
-        Long id,
+        Long productId,
         int quantity,
         BigDecimal price
 ) {
