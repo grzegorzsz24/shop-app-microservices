@@ -1,4 +1,4 @@
-package org.example.orderservice.application.dto;
+package org.example.orderservice.application.dto.payment;
 
 import org.example.orderservice.domain.model.payment.PaymentStatus;
 

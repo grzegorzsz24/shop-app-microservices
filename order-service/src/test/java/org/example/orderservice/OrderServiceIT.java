@@ -1,7 +1,7 @@
 package org.example.orderservice;
 
 import io.restassured.RestAssured;
-import org.example.orderservice.application.dto.OrderRequest;
+import org.example.orderservice.application.dto.order.OrderRequest;
 import org.example.orderservice.stubs.InventoryClientStub;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
