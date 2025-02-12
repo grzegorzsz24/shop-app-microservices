@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.orderservice.application.dto.CartItemDto;
 import org.example.orderservice.application.dto.payment.PaymentLinkRequest;
 import org.example.orderservice.application.dto.payment.PaymentLinkResponse;
@@ -26,6 +27,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
@@ -82,6 +84,7 @@ public class PaymentService {
             result.put("paymentUrl", session.getUrl());
             return result;
         } catch (StripeException e) {
+            log.error("Error creating Stripe payment session", e);
             throw new CustomStripeException("Stripe was unable to create a payment session");
         }
     }
