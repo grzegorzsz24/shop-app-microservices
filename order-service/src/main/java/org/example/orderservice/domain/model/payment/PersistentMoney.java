@@ -19,7 +19,7 @@ public record PersistentMoney(
         @Column(nullable = false, precision = 19, scale = 2)
         BigDecimal amount,
 
-        @Column(nullable = false, columnDefinition = "BPCHAR(3)")
+        @Column(nullable = false, columnDefinition = "CHAR(3)")
         String currency
 ) {
     public PersistentMoney {
