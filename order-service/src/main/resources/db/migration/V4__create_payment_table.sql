@@ -1,11 +1,11 @@
 CREATE TABLE payments
 (
-    id                  UUID                        NOT NULL,
+    id                  CHAR(36)                    NOT NULL,
     payment_session_id  VARCHAR(255)                NOT NULL,
     status              VARCHAR(255)                NOT NULL,
-    creation_date       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    last_update_date    TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    order_id            UUID                        NOT NULL,
+    creation_date       TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_update_date    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    order_id            CHAR(36)                    NOT NULL,
     amount              NUMERIC(19, 2)              NOT NULL,
     currency            CHAR(3)                     NOT NULL,
     CONSTRAINT pk_payments PRIMARY KEY (id),
