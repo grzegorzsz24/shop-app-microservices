@@ -1,6 +1,8 @@
 package org.example.orderservice.domain.model.payment;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.example.orderservice.domain.model.order.Order;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -8,7 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Payment {
 
     @Id
@@ -34,5 +41,9 @@ public class Payment {
 
     @Embedded
     private PersistentMoney persistentMoney;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Order order;
 
 }
