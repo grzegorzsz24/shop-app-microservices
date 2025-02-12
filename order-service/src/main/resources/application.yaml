@@ -57,6 +57,9 @@ resilience4j:
         wait-duration:
           seconds: 5
 
+app:
+  base-url: http://localhost:8081
+
 payment:
   stripe:
     api-key: ${STRIPE_API_KEY}
