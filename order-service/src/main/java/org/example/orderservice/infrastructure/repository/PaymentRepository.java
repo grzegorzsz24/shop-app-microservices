@@ -12,4 +12,6 @@ public interface PaymentRepository extends JpaRepository<Payment, UUID> {
 
     @Query(name = "Payment.findPaymentStatusResponseByOrderUUID", nativeQuery = true)
     Optional<PaymentStatusResponse> findPaymentStatusResponseByOrderUUID(UUID uuid);
+
+    Optional<Payment> findByPaymentSessionId(String id);
 }
