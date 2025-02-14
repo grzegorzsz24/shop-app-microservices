@@ -9,6 +9,7 @@ import jakarta.mail.util.ByteArrayDataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.notificationservice.infrastructure.exception.AttachmentProcessingException;
+import org.example.notificationservice.infrastructure.exception.StorageFetchException;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,12 +31,12 @@ public class AttachmentFactory {
         try {
             multipart.addBodyPart(createAttachmentPart(bucketPath));
             log.info("Successfully added attachment from s3 bucket");
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException | IOException | StorageFetchException e) {
             throw new AttachmentProcessingException(e.getMessage(), e.getCause());
         }
     }
 
-    private BodyPart createAttachmentPart(String bucketPath) throws MessagingException, IOException {
+    private BodyPart createAttachmentPart(String bucketPath) throws MessagingException, IOException, StorageFetchException {
         InputStream attachmentStream = remoteStorageService.fetch(bucketPath);
         ByteArrayDataSource dataSource = new ByteArrayDataSource(attachmentStream, determineMimeType(bucketPath));
         MimeBodyPart bodyPart = new MimeBodyPart();
