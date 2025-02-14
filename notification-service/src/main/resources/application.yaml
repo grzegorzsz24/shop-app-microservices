@@ -24,3 +24,11 @@ app:
     sender:
       name:
       mail:
+
+s3:
+  bucket:
+    name: ${BUCKET_NAME}
+  region:
+    name: ${AWS_REGION:eu-west-3}
+  accessKey: ${AWS_ACCESS_KEY_ID}
+  secretKey: ${AWS_SECRET_ACCESS_KEY}
