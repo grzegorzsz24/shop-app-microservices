@@ -19,11 +19,30 @@ spring:
     retry:
       backoff: 2000
 
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    ssl:
+      enabled: true
+      algorithm: TLSv1.3
+
 app:
   mail:
     sender:
       name:
       mail:
+
+  rabbitmq:
+    queues:
+      mail: mail.mailing
+      mail-dead-letter: mail.dlq
+    exchanges:
+      mail: mail.exchange
+      mail-dlx-exchange: ${app.rabbitmq.queues.mail}.dlx
+    routing-keys:
+      mail: mailing-routing-key
 
 s3:
   bucket:
@@ -32,3 +51,4 @@ s3:
     name: ${AWS_REGION:eu-west-3}
   accessKey: ${AWS_ACCESS_KEY_ID}
   secretKey: ${AWS_SECRET_ACCESS_KEY}
+
