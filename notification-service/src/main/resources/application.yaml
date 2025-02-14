@@ -18,3 +18,9 @@ spring:
             enable: true
     retry:
       backoff: 2000
+
+app:
+  mail:
+    sender:
+      name:
+      mail:
