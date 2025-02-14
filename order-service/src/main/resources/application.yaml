@@ -68,3 +68,13 @@ payment:
     webhook-secret-key: ${STRIPE_WEBHOOK_SECRET_KEY}
   check-status-delay: PT3M
   payment-max-age: 15
+
+s3:
+  bucket:
+    name: ${BUCKET_NAME}
+    base:
+      dir: ${S3_BASE_DIR}
+  region:
+    name: ${AWS_REGION:eu-west-3}
+  accessKey: ${AWS_ACCESS_KEY_ID}
+  secretKey: ${AWS_SECRET_ACCESS_KEY}
