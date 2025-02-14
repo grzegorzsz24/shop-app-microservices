@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: notification-service
+
+  config:
+    import: optional:file:.env[.properties]
+
+  mail:
+    host:
+    port:
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    retry:
+      backoff: 2000
