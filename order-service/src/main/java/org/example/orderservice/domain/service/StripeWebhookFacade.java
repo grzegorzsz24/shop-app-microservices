@@ -49,8 +49,7 @@ public class StripeWebhookFacade {
                     throw new CustomStripeException("Invalid event type");
             }
             return session.getId();
-        }
-        catch (StripeException | NoSuchElementException e) {
+        } catch (StripeException | NoSuchElementException e) {
             log.error("Something went wrong while extracting sessionId from event.");
             throw new CustomStripeException("Session ID not found");
         }

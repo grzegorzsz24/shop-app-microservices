@@ -2,7 +2,6 @@ package org.example.orderservice.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.example.orderservice.application.client.CartServiceClient;
 import org.example.orderservice.application.client.ProductServiceClient;
 import org.example.orderservice.application.dto.CartDto;
@@ -10,7 +9,6 @@ import org.example.orderservice.application.dto.CartItemDto;
 import org.example.orderservice.application.dto.ProductPriceResponse;
 import org.example.orderservice.application.dto.order.OrderRequest;
 import org.example.orderservice.application.dto.order.OrderResponse;
-
 import org.example.orderservice.domain.mapper.OrderMapper;
 import org.example.orderservice.domain.model.order.Order;
 import org.example.orderservice.domain.model.order.OrderPaidEvent;

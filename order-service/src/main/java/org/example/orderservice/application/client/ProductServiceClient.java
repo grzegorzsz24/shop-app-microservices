@@ -18,6 +18,7 @@ public class ProductServiceClient {
                 .uri("/api/categories/products/prices")
                 .body(productIds)
                 .retrieve()
-                .body(new ParameterizedTypeReference<>() {});
+                .body(new ParameterizedTypeReference<>() {
+                });
     }
 }

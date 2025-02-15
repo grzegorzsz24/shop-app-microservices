@@ -26,12 +26,6 @@ class OrderServiceIT {
     @LocalServerPort
     private Integer port;
 
-    @BeforeEach
-    void setUp() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = port;
-    }
-
     @BeforeAll
     static void beforeAll() {
         mySQLContainer.start();
@@ -40,6 +34,12 @@ class OrderServiceIT {
     @AfterAll
     static void afterAll() {
         mySQLContainer.stop();
+    }
+
+    @BeforeEach
+    void setUp() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = port;
     }
 
     @Test
