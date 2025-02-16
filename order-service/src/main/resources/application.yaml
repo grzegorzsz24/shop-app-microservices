@@ -61,6 +61,11 @@ resilience4j:
 
 app:
   base-url: http://localhost:8081
+  rabbitmq:
+    exchanges:
+      mails: mail.exchange
+    routing-keys:
+      mails: mailing-routing-key
 
 payment:
   stripe:
