@@ -11,7 +11,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.file.Path;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +26,8 @@ public class RemoteStorageService implements StorageService {
     private String bucketBaseDir;
 
     @Override
-    public String save(String fileName, String contentType, ByteArrayOutputStream data, Path directory) {
-        String key = bucketBaseDir + directory.toString() + "/" + fileName;
+    public String save(String fileName, String contentType, ByteArrayOutputStream data) {
+        String key = bucketBaseDir + "/" + fileName;
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
@@ -37,7 +36,7 @@ public class RemoteStorageService implements StorageService {
 
         try {
             s3Client.putObject(putObjectRequest, RequestBody.fromBytes(data.toByteArray()));
-            log.info("saved {} to {}", fileName, directory);
+            log.info("saved to {}", fileName);
         } catch (S3Exception e) {
             throw new StorageSaveException(e.getMessage(), e.getCause());
         }
