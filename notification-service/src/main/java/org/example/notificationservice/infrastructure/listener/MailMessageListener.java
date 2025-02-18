@@ -15,12 +15,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 class MailMessageListener {
-    private final MailSenderService mailService;
-    private final RabbitTemplate rabbitTemplate;
-
     public static final String HEADER_X_RETRIES_COUNT = "x-retries-count";
     public static final int MAX_RETRIES_COUNT = 3;
-
+    private final MailSenderService mailService;
+    private final RabbitTemplate rabbitTemplate;
     @Value("${app.rabbitmq.exchanges.mail}")
     private String mailExchange;
 
