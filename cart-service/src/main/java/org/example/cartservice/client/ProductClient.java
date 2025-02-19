@@ -12,10 +12,10 @@ public interface ProductClient {
     @CircuitBreaker(name = "product", fallbackMethod = "fallbackMethod")
     @Retry(name = "product")
     boolean isProductAvailable(@PathVariable("categoryId") Long categoryId,
-                      @PathVariable("productId") Long productId,
-                      @RequestParam Integer quantity);
+                               @PathVariable("productId") Long productId,
+                               @RequestParam Integer quantity);
 
-    default boolean fallbackMethod(Long categoryId, Long productId, Integer quantity,Throwable throwable) {
+    default boolean fallbackMethod(Long categoryId, Long productId, Integer quantity, Throwable throwable) {
         // TODO add logging
 
         return false;

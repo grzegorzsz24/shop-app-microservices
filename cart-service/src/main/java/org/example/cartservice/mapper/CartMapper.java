@@ -11,5 +11,6 @@ import org.mapstruct.MappingConstants;
 public interface CartMapper {
 
     CartResponse toResponse(Cart cart);
+
     CartItem toItem(CartItemDto cartItemDto);
 }
