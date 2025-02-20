@@ -20,7 +20,7 @@ public class OrderConfirmationScheduler {
 
     @EventListener
     public void generateOrderConfirmation(OrderPaidEvent event) {
-        String fileName = "order-summaries/" + LocalDate.now() + ".pdf";
+        String fileName = "/order-summaries/" + LocalDate.now() + ".pdf";
         byte[] data = pdfGeneratorService.generateOrderSummary(event.getOrder());
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
