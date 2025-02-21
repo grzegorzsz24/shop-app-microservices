@@ -36,26 +36,25 @@ public class StripeWebhookFacade {
 
     public String extractSessionIdFromEvent(Event event) {
         try {
-            Session session;
-            switch (event.getType()) {
-                case "payment_intent.succeeded":
+            Session session = switch (event.getType()) {
+                case "payment_intent.succeeded" -> {
                     PaymentIntent paymentIntent = extractPaymentIntentFromEvent(event);
-                    session = extractSessionFromPaymentIntent(paymentIntent);
-                    break;
-                case "checkout.session.completed", "checkout.session.async_payment_failed":
-                    session = extractSessionFromEvent(event);
-                    break;
-                default:
-                    throw new CustomStripeException("Invalid event type");
-            }
+                    yield extractSessionFromPaymentIntent(paymentIntent);
+                }
+                case "checkout.session.completed", "checkout.session.async_payment_failed" ->
+                        extractSessionFromEvent(event);
+                default -> throw new CustomStripeException("Invalid event type");
+            };
             return session.getId();
         } catch (StripeException | NoSuchElementException e) {
-            log.error("Something went wrong while extracting sessionId from event.");
+            log.error(e.getMessage(), e.getCause());
             throw new CustomStripeException("Session ID not found");
         }
     }
 
     private Session extractSessionFromEvent(Event event) {
+        log.info("Raw event data: {}", event.getDataObjectDeserializer().getRawJson());
+
         return (Session) event.getDataObjectDeserializer().getObject()
                 .orElseThrow(() -> {
                     log.error("Failed to deserialize Session from event: {}", event.getId());

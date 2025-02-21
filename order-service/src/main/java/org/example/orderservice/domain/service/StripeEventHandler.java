@@ -20,7 +20,7 @@ public class StripeEventHandler {
     private final OrderService orderService;
 
     public void handleEvent(Event event) {
-        log.info("Handling payment event");
+        log.info("Handling payment event: {}", event.getType());
         switch (event.getType()) {
             case "payment_intent.succeeded" -> handlePaymentSuccessful(event);
             case "checkout.session.completed" -> handlePaymentProcessing(event);

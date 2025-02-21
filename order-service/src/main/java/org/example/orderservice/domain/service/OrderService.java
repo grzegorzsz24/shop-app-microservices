@@ -77,6 +77,7 @@ public class OrderService {
         order.setStatus(OrderStatus.PAID);
         orderRepository.save(order);
         applicationEventPublisher.publishEvent(new OrderPaidEvent(this, order));
+        log.info("Event published");
     }
 
     private Optional<Order> getOrder(UUID id) {
