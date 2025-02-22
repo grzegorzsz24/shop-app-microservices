@@ -24,15 +24,12 @@ spring:
     port: ${RABBITMQ_PORT}
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
-    ssl:
-      enabled: true
-      algorithm: TLSv1.3
 
 app:
   mail:
     sender:
       name: Sigma-shop
-      mail:
+      mail: grzegorzsz884@gmail.com
 
   rabbitmq:
     queues:
