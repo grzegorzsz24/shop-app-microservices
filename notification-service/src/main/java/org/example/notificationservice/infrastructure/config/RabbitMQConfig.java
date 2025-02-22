@@ -3,6 +3,7 @@ package org.example.notificationservice.infrastructure.config;
 import lombok.RequiredArgsConstructor;
 import org.example.notificationservice.infrastructure.exception.InvalidPayloadFatalExceptionStrategy;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.ConditionalRejectingErrorHandler;
@@ -15,7 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @RequiredArgsConstructor
-class RabbitMQConfig {
+class RabbitMQConfig implements RabbitListenerConfigurer {
     private final LocalValidatorFactoryBean validatorFactoryBean;
 
     @Value("${app.rabbitmq.queues.mail}")
