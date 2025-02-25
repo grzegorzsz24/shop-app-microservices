@@ -30,14 +30,14 @@ public class OrderConfirmationScheduler {
             throw new StorageSaveException(e.getMessage(), e.getCause());
         }
 
-        remoteStorageService.save(fileName, "application/pdf", outputStream);
+        String bucketKey = remoteStorageService.save(fileName, "application/pdf", outputStream);
 
         Mail mail = Mail.builder()
                 .recipient(event.getOrder().getOrdererEmail())
                 .subject("Order Confirmation")
                 .message("Thank you for your order!")
                 .contentType("application/pdf")
-                .bucketPath(fileName)
+                .bucketPath(bucketKey)
                 .build();
         messageSender.sendMailRequest(mail);
     }
