@@ -3,6 +3,8 @@
 ## Overview
 This project is a microservices-based e-commerce platform built using Spring Boot. The system allows users to browse and purchase products, pay using Stripe, and receive invoices via email.
 
+**Note:** The application is currently in its early stages and is continuously being developed with new features.
+
 ## Microservices
 - **Order Service** – Manages orders and order processing.
 - **Product Service** – Handles product listings and inventory.
